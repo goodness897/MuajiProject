@@ -54,7 +54,7 @@ public class Tab1 extends Fragment {
 
     };
 
-    public void initData() {
+    private void initData() {
         String s;
 
         switch (type) { //image, title, type, content, menu1, menu2
