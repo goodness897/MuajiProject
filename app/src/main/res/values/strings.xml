@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">그 거리 뭐 있소</string>
+    <string name="university">대학을 선택하세요</string>
+    <string name="search_title">검색</string>
+</resources>

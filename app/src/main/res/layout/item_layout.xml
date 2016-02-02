@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/image_icon"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/first"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="한솥도시락"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="음식점"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginRight="20dp"
+                android:textSize="15dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영양 듬뿍 좋은 재료, 좋은 가격"
+            android:textSize="15dp"
+            android:textColor="#777777"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/text_name2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="대표 메뉴"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/text_menu1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="# 치킨마요 2,700원"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/text_menu2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="# 도련님 도시락 3,400원"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
+</LinearLayout>
