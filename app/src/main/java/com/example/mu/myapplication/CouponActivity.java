@@ -1,5 +1,7 @@
 package com.example.mu.myapplication;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CouponActivity extends AppCompatActivity {
+public class CouponActivity extends Activity {
     ListView listView;
     CouponAdapter cAdapter;
 
@@ -28,6 +31,26 @@ public class CouponActivity extends AppCompatActivity {
         cAdapter = new CouponAdapter(this);
         listView.setAdapter(cAdapter);
         cAdapter.add(new CouponData(R.drawable.image1, "쿠폰", "20% 할인 쿠폰"));
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("그 거리 뭐 있소");
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
     }
 }
 class CouponData {

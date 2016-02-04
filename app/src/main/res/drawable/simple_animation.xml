@@ -3,16 +3,16 @@
     android:oneshot="false">
 
     <item
-        android:duration="2000"
+        android:duration="1500"
         android:clipOrientation="horizontal"
         android:drawable="@drawable/coupon1" />
 
     <item
-        android:duration="2000"
+        android:duration="1500"
         android:clipOrientation="horizontal"
         android:drawable="@drawable/coupon2" />
     <item
-        android:duration="2000"
+        android:duration="1500"
         android:clipOrientation="horizontal"
         android:drawable="@drawable/coupon3" />
 

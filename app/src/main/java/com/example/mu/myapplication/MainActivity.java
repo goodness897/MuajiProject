@@ -1,6 +1,7 @@
 package com.example.mu.myapplication;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -9,10 +10,12 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,9 +43,29 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //
+
         intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("그 거리 뭐 있소");
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
 
         spinner = (Spinner) findViewById(R.id.spinner);
         addspin = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
@@ -84,10 +107,10 @@ public class MainActivity extends Activity {
                     double longitude = gps.getLongitude();
                     String location = findAddress(latitude, longitude);
                     textShowLocation.setText(location);
-                    Toast.makeText(
+                    /*Toast.makeText(
                             getApplicationContext(),
                             "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude + "\n주소 : " + location,
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();*/
                 } else {
                     // GPS 를 사용할수 없으므로
                     //  gps.showSettingsAlert();

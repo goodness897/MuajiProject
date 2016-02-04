@@ -1,5 +1,6 @@
 package com.example.mu.myapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -11,10 +12,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 public class TabActivity extends FragmentActivity {
 
@@ -36,6 +41,26 @@ public class TabActivity extends FragmentActivity {
         Intent intent = getIntent();
         type = intent.getExtras().getInt("type");
         intent.putExtra("type", type);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("그 거리 뭐 있소");
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
 
 
         switch (type) {
@@ -82,12 +107,12 @@ public class TabActivity extends FragmentActivity {
         outState.putString(TAB_TAG, tabHost.getCurrentTabTag());
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        *//*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 
            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
            SearchView search = (SearchView) menu.findItem(R.id.search).getActionView();
@@ -105,10 +130,10 @@ public class TabActivity extends FragmentActivity {
                 }
             });
 
-        }*/
+        }*//*
         return true;
     }
-
+*/
 
     public int getType() {
         return type;

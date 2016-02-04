@@ -9,7 +9,7 @@
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/first"
         android:scaleType="centerCrop" />
 

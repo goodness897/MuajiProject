@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioButton2"
-                    android:buttonTint="@color/radioButton"
+                    android:buttonTint="@color/mainColor"
                     android:clickable="false" />
 
                 <RadioButton
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:textColor="#3FAB34"
+                android:textColor="@color/mainColor"
                 android:text="상호명" />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:textColor="#3FAB34"
+                android:textColor="@color/mainColor"
                 android:text="평점"
                 android:layout_marginTop="10dp" />
 
@@ -139,6 +139,7 @@
                 android:layout_marginTop="10dp">
 
                 <ImageView
+                    android:id="@+id/menu_image1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/event_image"
@@ -146,6 +147,7 @@
                     android:scaleType="fitXY" />
 
                 <ImageView
+                    android:id="@+id/menu_image2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -160,6 +162,7 @@
                 android:layout_height="150dp">
 
                 <ImageView
+                    android:id="@+id/menu_image3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/event_image"
@@ -169,6 +172,7 @@
                     android:scaleType="fitXY" />
 
                 <ImageView
+                    android:id="@+id/menu_image4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -183,7 +187,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="130dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
@@ -193,32 +197,42 @@
                     android:layout_height="wrap_content"></ListView>
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/mappp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:scaleType="fitXY" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="홈페이지 연결 시, 더 많은 정보 확인이 가능합니다."
-                android:id="@+id/textView3"
-                android:layout_centerHorizontal="true"
-                android:textSize="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mappp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitXY" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#3FAB34"
-                android:textColor="#ffffff"
-                android:text="리뷰 쓰기"
-                android:onClick="onButton3Clicked" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="홈페이지 연결 시, 더 많은 정보 확인이 가능합니다."
+                    android:layout_weight="1"
+                    android:id="@+id/textView3"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center" />
+
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mainColor"
+                    android:textColor="#ffffff"
+                    android:text="리뷰 쓰기"
+                    android:onClick="onButton3Clicked" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -230,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#3FAB34"
+                    android:background="@color/mainColor"
                     android:textColor="#ffffff"
                     android:text="홈페이지 연결"
                     android:onClick="onButton1Clicked" />
@@ -240,7 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#3FAB34"
+                    android:background="@color/mainColor"
                     android:textColor="#ffffff"
                     android:text="전화 연결"
                     android:onClick="onButton2Clicked" />

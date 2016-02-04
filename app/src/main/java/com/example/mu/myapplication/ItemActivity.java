@@ -1,19 +1,26 @@
 package com.example.mu.myapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.StrictMode;
+import android.provider.SyncStateContract;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,8 +28,11 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class ItemActivity extends Activity {
@@ -56,14 +66,46 @@ public class ItemActivity extends Activity {
         position = this.getIntent().getExtras().getInt("position");
         listView = (ListView) findViewById(R.id.listView);
 
+        if(android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("그 거리 뭐 있소");
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
+
 
         mAdapter = new My2Adapter(this);
         listView.setAdapter(mAdapter);
+        menuImage1 = (ImageView)findViewById(R.id.menu_image1);
+        menuImage2 = (ImageView)findViewById(R.id.menu_image2);
+        menuImage3 = (ImageView)findViewById(R.id.menu_image3);
+        menuImage4 = (ImageView)findViewById(R.id.menu_image4);
 
-        mAdapter.add(new ItemData("짜장면", "7,000원"));
-        mAdapter.add(new ItemData("짬뽕", "7,000원"));
-        mAdapter.add(new ItemData("볶음밥", "7,000원"));
-        mAdapter.add(new ItemData("탕수육", "7,000원"));
+        setImage(menuImage1, "http://www.hsd.co.kr/resources/uploads/lunch/1433477392252_rrqnwbzu.jpg");
+        setImage(menuImage2, "http://www.hsd.co.kr/resources/uploads/lunch/1433477371928_hdujnuwk.jpg");
+        setImage(menuImage3, "http://www.hsd.co.kr/resources/uploads/lunch/1435645212983_kkqeuafp.jpg");
+        setImage(menuImage4, "http://www.hsd.co.kr/resources/uploads/lunch/1433486885624_xijfduwu.jpg");
+        mAdapter.add(new ItemData("개나리 도시락", "8,000원"));
+        mAdapter.add(new ItemData("진달래 도시락", "7,000원"));
+        mAdapter.add(new ItemData("불고기 비빔밥", "4,500원"));
+        mAdapter.add(new ItemData("고기고기 도시락", "3,600원"));
         //listView.setAdapter(menuArray);
         mCustomPagerAdapter = new CustomPagerAdapter(this);
 
@@ -151,7 +193,7 @@ public class ItemActivity extends Activity {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
 
-        Uri uri = Uri.parse("http://www.naver.com");
+        Uri uri = Uri.parse("http://hansotuos.modoo.at/");
         intent.setData(uri);
         startActivity(intent);
     }
@@ -190,5 +232,21 @@ public class ItemActivity extends Activity {
             }
         });
         rankDialog.show();
+    }
+
+    public void setImage(ImageView imageView, String address){
+        try {
+            URL url = new
+                    URL(address);
+            URLConnection conn = url.openConnection();
+            conn.connect();
+            BufferedInputStream bis = new
+                    BufferedInputStream(conn.getInputStream());
+            Bitmap bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            imageView.setImageBitmap(bm);
+        } catch (IOException e) {
+
+        }
     }
 }
