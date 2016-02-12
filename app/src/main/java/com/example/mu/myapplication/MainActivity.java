@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,34 +39,17 @@ public class MainActivity extends Activity {
     private String currentLocationAddress;
 
     private GpsInfo gps;
+    static boolean flag = false;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
+        title = getString(R.string.app_name);
+        setActionBar(title);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
-        mTitleTextView.setText("그 거리 뭐 있소");
-
-        ImageButton imageButton = (ImageButton) mCustomView
-                .findViewById(R.id.search_image);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
 
         spinner = (Spinner) findViewById(R.id.spinner);
         addspin = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
@@ -94,7 +78,7 @@ public class MainActivity extends Activity {
         drawable.setExitFadeDuration(800);
         drawable.start();
 
-        btnShowLocation = (Button) findViewById(R.id.locationButton);
+        /*btnShowLocation = (Button) findViewById(R.id.locationButton);
         textShowLocation = (TextView) findViewById(R.id.locationText);
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -107,16 +91,16 @@ public class MainActivity extends Activity {
                     double longitude = gps.getLongitude();
                     String location = findAddress(latitude, longitude);
                     textShowLocation.setText(location);
-                    /*Toast.makeText(
+                    *//*Toast.makeText(
                             getApplicationContext(),
                             "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude + "\n주소 : " + location,
-                            Toast.LENGTH_LONG).show();*/
+                            Toast.LENGTH_LONG).show();*//*
                 } else {
                     // GPS 를 사용할수 없으므로
                     //  gps.showSettingsAlert();
                 }
             }
-        });
+        });*/
 
 
     }
@@ -203,4 +187,39 @@ public class MainActivity extends Activity {
         intent = new Intent(this, CouponActivity.class);
         startActivity(intent);
     }
+    public void setActionBar(String title){
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+
+        final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
+        mTitleTextView.setText(title);
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                flag = !flag;
+                if(flag){ //검색창 활성화
+                    searchEdit.setVisibility(View.VISIBLE);
+                    mTitleTextView.setVisibility(View.GONE);
+                } else { // 검색
+                    searchEdit.setVisibility(View.GONE);
+                    mTitleTextView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+    }
+
+
 }

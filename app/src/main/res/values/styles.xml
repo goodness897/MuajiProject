@@ -12,4 +12,12 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="ActionBarTabStyle.Dgrey" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_green</item>
+    </style>
+
+    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/custom_btn_radio</item>
+    </style>
+
 </resources>

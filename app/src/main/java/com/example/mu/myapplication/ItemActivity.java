@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,25 +40,25 @@ public class ItemActivity extends Activity {
 
     CustomPagerAdapter mCustomPagerAdapter;
     ViewPager mViewPager;
-    TextView itemTitle;
-    TextView itemContent;
     ImageView menuImage1;
     ImageView menuImage2;
     ImageView menuImage3;
     ImageView menuImage4;
     ListView listView;
     My2Adapter mAdapter;
+    TextView textView;
 
     RatingBar ratingBar;
     int[] mResources = {
             R.drawable.first,
             R.drawable.second,
             R.drawable.third,
-            R.drawable.fourth,
+            R.drawable.four,
             R.drawable.fifth,
     };
-    String[] menuName = {"참치마요", "돈치마요", "빅치킨마요", "참치샐러드마요", "닭가슴살샐러드마요"};
+    String[] menuName = {"1", "2", "3", "4", "5"};
     private int position;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,26 +71,8 @@ public class ItemActivity extends Activity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
-        mTitleTextView.setText("그 거리 뭐 있소");
-
-        ImageButton imageButton = (ImageButton) mCustomView
-                .findViewById(R.id.search_image);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
-
+        String title = getString(R.string.app_name);
+        setActionBar(title);
 
         mAdapter = new My2Adapter(this);
         listView.setAdapter(mAdapter);
@@ -97,6 +80,8 @@ public class ItemActivity extends Activity {
         menuImage2 = (ImageView)findViewById(R.id.menu_image2);
         menuImage3 = (ImageView)findViewById(R.id.menu_image3);
         menuImage4 = (ImageView)findViewById(R.id.menu_image4);
+        textView = (TextView)findViewById(R.id.textView);
+        textView.setText(menuName[0]);
 
         setImage(menuImage1, "http://www.hsd.co.kr/resources/uploads/lunch/1433477392252_rrqnwbzu.jpg");
         setImage(menuImage2, "http://www.hsd.co.kr/resources/uploads/lunch/1433477371928_hdujnuwk.jpg");
@@ -108,12 +93,8 @@ public class ItemActivity extends Activity {
         mAdapter.add(new ItemData("고기고기 도시락", "3,600원"));
         //listView.setAdapter(menuArray);
         mCustomPagerAdapter = new CustomPagerAdapter(this);
-
         mViewPager = (ViewPager) findViewById(R.id.pager);
-
-
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
-
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -126,18 +107,23 @@ public class ItemActivity extends Activity {
                 switch (position) {
                     case 0:
                         radioGroup.check(R.id.radioButton);
+                        textView.setText(menuName[0]);
                         break;
                     case 1:
                         radioGroup.check(R.id.radioButton2);
+                        textView.setText(menuName[1]);
                         break;
                     case 2:
                         radioGroup.check(R.id.radioButton3);
+                        textView.setText(menuName[2]);
                         break;
                     case 3:
                         radioGroup.check(R.id.radioButton4);
+                        textView.setText(menuName[3]);
                         break;
                     case 4:
                         radioGroup.check(R.id.radioButton5);
+                        textView.setText(menuName[4]);
                         break;
                 }
 
@@ -177,8 +163,8 @@ public class ItemActivity extends Activity {
             View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
             imageView.setImageResource(mResources[position]);
-            TextView textView = (TextView) itemView.findViewById(R.id.textView);
-            textView.setText(menuName[position]);
+            // textView = (TextView) container.findViewById(R.id.textView);
+            //textView.setText(menuName[position]);
             container.addView(itemView);
             return itemView;
         }
@@ -248,5 +234,38 @@ public class ItemActivity extends Activity {
         } catch (IOException e) {
 
         }
+    }
+    public void setActionBar(String title){
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+
+        final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
+        mTitleTextView.setText(title);
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.search_image);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                MainActivity.flag = !MainActivity.flag;
+                if(MainActivity.flag){ //검색창 활성화
+                    searchEdit.setVisibility(View.VISIBLE);
+                    mTitleTextView.setVisibility(View.GONE);
+                } else { // 검색
+                    searchEdit.setVisibility(View.GONE);
+                    mTitleTextView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
+
     }
 }

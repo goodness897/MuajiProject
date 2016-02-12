@@ -19,62 +19,87 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="1">
-
-            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"></android.support.v4.view.ViewPager>
-
-            <RadioGroup
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:orientation="horizontal"
-                android:id="@+id/radiogroup">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"></android.support.v4.view.ViewPager>
+                <LinearLayout
+                    android:background="#70777777"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioButton"
-                    android:checked="true"
-                    android:buttonTint="@color/radioButton"
-                    android:clickable="false" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                    <RadioGroup
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:orientation="horizontal"
+                        android:id="@+id/radiogroup"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioButton2"
-                    android:buttonTint="@color/mainColor"
-                    android:clickable="false" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton"
+                            android:checked="true"
+                            android:button="@drawable/custom_btn_radio"
+                            android:clickable="false" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioButton3"
-                    android:buttonTint="@color/radioButton"
-                    android:clickable="false" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton2"
+                            android:button="@drawable/custom_btn_radio"
+                            android:clickable="false" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioButton4"
-                    android:buttonTint="@color/radioButton"
-                    android:clickable="false" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton3"
+                            android:button="@drawable/custom_btn_radio"
+                            android:clickable="false" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioButton5"
-                    android:buttonTint="@color/radioButton"
-                    android:clickable="false" />
-            </RadioGroup>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton4"
+                            android:button="@drawable/custom_btn_radio"
+                            android:clickable="false" />
 
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton5"
+                            android:button="@drawable/custom_btn_radio"
+                            android:clickable="false" />
+                    </RadioGroup>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:textSize="15dp"
+                        android:text="메뉴"
+                        android:textColor="#ffffff"
+                        android:gravity="bottom" />
+
+                </LinearLayout>
+            </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:textSize="15dp"
                 android:textColor="@color/mainColor"
                 android:text="상호명" />
@@ -97,6 +122,12 @@
                 android:textColor="#777777"
                 android:textSize="15dp"
                 android:layout_marginTop="5dp" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@drawable/line"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,6 +162,11 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@drawable/line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,7 +220,11 @@
 
 
             </LinearLayout>
-
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@drawable/line"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
@@ -215,6 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="홈페이지 연결 시, 더 많은 정보 확인이 가능합니다."
+                    android:textColor="#777777"
                     android:layout_weight="1"
                     android:id="@+id/textView3"
                     android:layout_centerHorizontal="true"
@@ -228,10 +269,12 @@
                     android:layout_height="wrap_content"
                     android:background="@color/mainColor"
                     android:textColor="#ffffff"
+                    android:layout_marginTop="10dp"
                     android:text="리뷰 쓰기"
                     android:onClick="onButton3Clicked" />
 
             </LinearLayout>
+
 
 
             <LinearLayout

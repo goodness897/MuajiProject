@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,14 +32,20 @@ public class CouponActivity extends Activity {
         cAdapter = new CouponAdapter(this);
         listView.setAdapter(cAdapter);
         cAdapter.add(new CouponData(R.drawable.image1, "쿠폰", "20% 할인 쿠폰"));
+        String title = getString(R.string.app_name);
+        setActionBar(title);
+    }
+    public void setActionBar(String title){
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
-        mTitleTextView.setText("그 거리 뭐 있소");
+
+        final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
+        mTitleTextView.setText(title);
 
         ImageButton imageButton = (ImageButton) mCustomView
                 .findViewById(R.id.search_image);
@@ -46,11 +53,20 @@ public class CouponActivity extends Activity {
 
             @Override
             public void onClick(View view) {
+
+                MainActivity.flag = !MainActivity.flag;
+                if(MainActivity.flag){ //검색창 활성화
+                    searchEdit.setVisibility(View.VISIBLE);
+                    mTitleTextView.setVisibility(View.GONE);
+                } else { // 검색
+                    searchEdit.setVisibility(View.GONE);
+                    mTitleTextView.setVisibility(View.VISIBLE);
+                }
             }
         });
-
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
+
     }
 }
 class CouponData {
@@ -72,20 +88,23 @@ class CouponView extends FrameLayout {
     }
 
     ImageView imageView;
-    TextView titleView,contentView;
+    TextView couponTitle,couponMenu;
 
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.coupon_item,this);
+        imageView = (ImageView)findViewById(R.id.coupon_image);
+        couponTitle = (TextView)findViewById(R.id.coupon_title);
+        couponMenu = (TextView)findViewById(R.id.coupon_menu);
+
 
     }
     CouponData mData;
     public void setCouponData(CouponData data){
         mData = data;
-        titleView.setText(data.title);
-        contentView.setText(data.content);
-
-
+        imageView.setImageResource(data.image);
+        couponTitle.setText(data.title);
+        couponMenu.setText(data.content);
     }
 
 }
