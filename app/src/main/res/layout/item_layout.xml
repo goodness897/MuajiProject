@@ -3,22 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginBottom="3dp">
+    android:layout_marginBottom="3dp"
+    android:descendantFocusability="blocksDescendants">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/image_icon"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/first"
+            android:scaleType="fitXY" />
+        <RatingBar
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            style="@style/starRatingBar"
+            android:clickable="false"
+            android:rating = "4.0"
+            android:stepSize="0.5" />
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/image_icon"
-        android:layout_width="125dp"
-        android:layout_height="160dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="0dp"
-        android:src="@drawable/first"
-        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_weight="9">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +97,5 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginTop="5dp"
             android:textStyle="italic" />
-
-
     </LinearLayout>
 </LinearLayout>

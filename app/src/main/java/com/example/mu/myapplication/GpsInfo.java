@@ -46,6 +46,8 @@ public class GpsInfo extends Service implements LocationListener {
     private boolean isNetworkEnabled = false;
     private boolean locationServiceAvailable = true;
 
+    private MainActivity main;
+
 
     public static GpsInfo getLocationManager(Context context) {
         if (instance == null) {
@@ -68,8 +70,6 @@ public class GpsInfo extends Service implements LocationListener {
      */
     @TargetApi(23)
     private void initLocationService(Context context) {
-
-
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -183,7 +183,7 @@ public class GpsInfo extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        initLocationService(getApplicationContext());
+
     }
 
     @Override
@@ -206,4 +206,5 @@ public class GpsInfo extends Service implements LocationListener {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
 }

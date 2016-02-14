@@ -6,4 +6,7 @@
     <color name="radioButton">#3CB371</color>
     <color name="mainColor">#3CB371</color>
     <color name="font_dark">#777777</color>
+    <color name="button_layout">#D9D9D9</color>
+    <color name="button_unclicked_layout">#ffffff</color>
+    <color name="button_clicked_layout">#4DE7E6E6</color>
 </resources>

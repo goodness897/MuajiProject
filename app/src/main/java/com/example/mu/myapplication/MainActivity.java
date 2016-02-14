@@ -3,21 +3,28 @@ package com.example.mu.myapplication;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,37 +35,77 @@ import java.util.Locale;
 
 
 public class MainActivity extends Activity {
-
     private Intent intent;
     private ArrayAdapter<CharSequence> addspin;
     private Spinner spinner;
-
     private Button btnShowLocation;
     private TextView textShowLocation;
-
     private String currentLocationAddress;
-
     private GpsInfo gps;
     static boolean flag = false;
     private String title;
-
+    private String location;
+    private String[] arrayForSpinner;
+    TextView label;
+    Button foodButton;
+    Button showButton;
+    Button funButton;
+    Button enjoyButton;
+    private boolean local = false;
+    private ListView drawerList;
+    private String[] navItems = {"무아지경","박무성","박지훈","김아연"};
+    private DrawerLayout mDrawerLayout;
+    private boolean mSlideState = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        arrayForSpinner = getResources().getStringArray(R.array.university);
+        drawerList = (ListView)findViewById(R.id.lv_activity_main_nav_list);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,navItems));
+        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.my_drawer_layout);
+        mDrawerLayout.setDrawerListener(new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, 0, 0){
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                mSlideState = false;//is Closed
+            }
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                mSlideState = true;//is Opened
+            }});
+
+        // 폰트 변경
+        /*foodButton = (Button)findViewById(R.id.buttonFood);
+        foodButton.setTypeface(Typeface.createFromAsset(getAssets(), "NanumGothic.ttf"));
+        showButton = (Button)findViewById(R.id.buttonShow);
+        showButton.setTypeface(Typeface.createFromAsset(getAssets(), "NanumGothicBold.ttf"));
+        funButton = (Button)findViewById(R.id.buttonFun);
+        funButton.setTypeface(Typeface.createFromAsset(getAssets(), "NanumGothicExtraBold.ttf"));
+        enjoyButton = (Button)findViewById(R.id.buttonEnjoy);*/
+
+        // make ActionBar
         title = getString(R.string.app_name);
         setActionBar(title);
-
-
         spinner = (Spinner) findViewById(R.id.spinner);
-        addspin = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
-        addspin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        local = true;
+        if(local){
+            location = setLocation();
+        }
 
+        System.out.println("위치는 : " +location);
+        if(location != null){
+            spinner.setAdapter(new CustomSpinnerAdapter(this, R.layout.spinner_row, arrayForSpinner, location));
+        }
+
+        /*addspin = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
+        addspin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(addspin);
         spinner.setMinimumWidth(30);
-
-
+*/
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -77,7 +124,6 @@ public class MainActivity extends Activity {
         drawable.setEnterFadeDuration(800);
         drawable.setExitFadeDuration(800);
         drawable.start();
-
         /*btnShowLocation = (Button) findViewById(R.id.locationButton);
         textShowLocation = (TextView) findViewById(R.id.locationText);
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +148,76 @@ public class MainActivity extends Activity {
             }
         });*/
 
+
+    }
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+
+        }
+    }
+    public String setLocation() {
+        gps = GpsInfo.getLocationManager(MainActivity.this);
+        String current_location = "성남시";
+        // GPS 사용유무 가져오기
+        if (gps.isGetLocation()) {
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            current_location = findAddress(latitude, longitude);
+            label = (TextView) findViewById(R.id.spinner_text);
+            local = false;
+        } else {
+            // GPS 를 사용할수 없으므로
+            //  gps.showSettingsAlert();
+        }
+        return current_location;
+
+    }
+    // Custom 스피너
+    public class CustomSpinnerAdapter extends ArrayAdapter<String>{
+
+        Context context;
+        String[] objects;
+        String firstElement;
+        boolean isFirstTime;
+
+        public CustomSpinnerAdapter(Context context, int textViewResourceId, String[] objects, String defaultText) {
+            super(context, textViewResourceId, objects);
+            this.context = context;
+            this.objects = objects;
+            this.isFirstTime = true;
+            setDefaultText(defaultText);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            if(isFirstTime) {
+                objects[0] = firstElement;
+                isFirstTime = false;
+            }
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            notifyDataSetChanged();
+            return getCustomView(position, convertView, parent);
+        }
+
+        public void setDefaultText(String defaultText) {
+            this.firstElement = objects[0];
+            objects[0] = defaultText;
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row = inflater.inflate(R.layout.spinner_row, parent, false);
+            label = (TextView) row.findViewById(R.id.spinner_text);
+            label.setText(objects[position]);
+            return row;
+        }
 
     }
 
@@ -132,6 +248,8 @@ public class MainActivity extends Activity {
         frameAnimation.start();
         super.onWindowFocusChanged(hasFocus);
     }*/
+
+    // 위치기반 주소찾기
     private String findAddress(double lat, double lng) {
         StringBuffer bf = new StringBuffer();
         Geocoder geocoder = new Geocoder(this, Locale.KOREA);
@@ -146,9 +264,10 @@ public class MainActivity extends Activity {
                     currentLocationAddress = address.get(0).getAddressLine(0).toString();
 
                     // 전송할 주소 데이터 (위도/경도 포함 편집)
-                    bf.append(currentLocationAddress).append("#");
+                    /*bf.append(currentLocationAddress).append("#");
                     bf.append(lat).append("#");
-                    bf.append(lng);
+                    bf.append(lng);*/
+                    bf.append(currentLocationAddress);
                 }
             }
 
@@ -187,6 +306,10 @@ public class MainActivity extends Activity {
         intent = new Intent(this, CouponActivity.class);
         startActivity(intent);
     }
+
+    public void onRefreshButton(View v){
+        setLocation();
+    }
     public void setActionBar(String title){
 
         ActionBar actionBar = getActionBar();
@@ -199,15 +322,15 @@ public class MainActivity extends Activity {
         final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
         mTitleTextView.setText(title);
 
-        ImageButton imageButton = (ImageButton) mCustomView
+        ImageButton searchButton = (ImageButton) mCustomView
                 .findViewById(R.id.search_image);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 flag = !flag;
-                if(flag){ //검색창 활성화
+                if (flag) { //검색창 활성화
                     searchEdit.setVisibility(View.VISIBLE);
                     mTitleTextView.setVisibility(View.GONE);
                 } else { // 검색
@@ -216,6 +339,18 @@ public class MainActivity extends Activity {
                 }
             }
         });
+        ImageButton drawerButton = (ImageButton) mCustomView.findViewById(R.id.drawer_image);
+        drawerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mSlideState) {
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                } else {
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                }
+            }
+    });
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
 

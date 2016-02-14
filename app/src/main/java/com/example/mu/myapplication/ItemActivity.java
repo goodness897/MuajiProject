@@ -58,6 +58,8 @@ public class ItemActivity extends Activity {
     };
     String[] menuName = {"1", "2", "3", "4", "5"};
     private int position;
+    private int count;
+    private float totalRank;
 
 
     @Override
@@ -185,11 +187,8 @@ public class ItemActivity extends Activity {
     }
 
     public void onButton2Clicked(View v) {
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-
-        Uri uri = Uri.parse("http://www.naver.com");
-        intent.setData(uri);
+        String phoneNum = "tel:010-2043-9377";
+        Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse(phoneNum));
         startActivity(intent);
     }
 
@@ -198,7 +197,6 @@ public class ItemActivity extends Activity {
         rankDialog.setContentView(R.layout.rank_dialog);
         rankDialog.setCancelable(true);
         ratingBar = (RatingBar) rankDialog.findViewById(R.id.dialog_ratingbar);
-
         TextView text = (TextView) rankDialog.findViewById(R.id.rank_dialog_text1);
         text.setText("평점을 남겨주세요");
 
@@ -207,12 +205,19 @@ public class ItemActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                count++; // 평점 남긴 횟수
                 final float userRankValue = ratingBar.getRating();
-                String myRank = Float.toString(userRankValue);
+                totalRank += userRankValue;
+                float score = totalRank / count;
+                String myRank = String.format("%.1f", score);
+               /* String myRank = Float.toString(score);
+                String.format("%.2f", Double.valueOf(myRank));*/
                 RatingBar rateBar = (RatingBar) findViewById(R.id.rateBar);
                 rateBar.setRating(userRankValue);
-                TextView textView = (TextView) findViewById(R.id.rateText);
-                textView.setText(myRank);
+                TextView rateText = (TextView) findViewById(R.id.rateText);
+                rateText.setText(myRank);
+                TextView rateCount = (TextView)findViewById(R.id.ratecountText);
+                rateCount.setText("(" + count + ")");
                 rankDialog.dismiss();
 
             }

@@ -96,7 +96,7 @@
 
                 </LinearLayout>
             </RelativeLayout>
-            <TextView
+            TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -110,37 +110,15 @@
                 android:layout_height="wrap_content"
                 android:text="한솥 도시락"
                 android:textColor="#404040"
-                android:textSize="20dp"
-                android:layout_marginTop="5dp" />
-
-            <TextView
-                android:id="@+id/item_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="좋은 재료, 좋은 가격 한솥 도시락"
-                android:layout_below="@+id/textView"
-                android:textColor="#777777"
-                android:textSize="15dp"
-                android:layout_marginTop="5dp" />
-
-            <ImageView
+                android:textSize="21sp"
                 android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="7dp"
-                android:background="@drawable/line"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:textColor="@color/mainColor"
-                android:text="평점"
-                android:layout_marginTop="10dp" />
-
+                android:layout_marginLeft="72dp"
+                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="72dp">
 
                 <RatingBar
                     android:layout_marginTop="5dp"
@@ -148,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
-                    style="?android:attr/ratingBarStyleSmall"
+                    style="@style/starRatingBar"
                     android:clickable="false"
                     android:numStars="5"
                     android:rating="4.3" />
@@ -159,10 +137,44 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="bottom" />
+                <TextView
+                    android:id="@+id/ratecountText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="bottom" />
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋은 재료, 좋은 가격 한솥 도시락"
+                android:layout_below="@+id/textView"
+                android:textColor="#777777"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="72dp"/>
+
+            ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@drawable/line"/>
+
+            TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/mainColor"
+                android:text="평점"
+                android:layout_marginTop="10dp" />
+
+
+
             <ImageView
+                android:layout_marginLeft="72dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="7dp"
@@ -170,9 +182,28 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/menuicon"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#404040"
+                    android:textSize="15sp"
+                    android:text="대표 메뉴"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
                 <ImageView
                     android:id="@+id/menu_image1"
@@ -230,7 +261,6 @@
                 android:layout_height="130dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
-
                 <ListView
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
@@ -250,7 +280,25 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:scaleType="fitXY" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <ImageButton
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/menuicon"/>
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#404040"
+                        android:text="주소"/>
 
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -262,7 +310,6 @@
                     android:textSize="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center" />
-
                 <Button
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -272,7 +319,6 @@
                     android:layout_marginTop="10dp"
                     android:text="리뷰 쓰기"
                     android:onClick="onButton3Clicked" />
-
             </LinearLayout>
 
 
@@ -289,7 +335,9 @@
                     android:layout_weight="1"
                     android:background="@color/mainColor"
                     android:textColor="#ffffff"
+                    android:paddingLeft="10dp"
                     android:text="홈페이지 연결"
+                    android:drawableLeft="@drawable/home"
                     android:onClick="onButton1Clicked" />
 
                 <Button
@@ -300,6 +348,8 @@
                     android:background="@color/mainColor"
                     android:textColor="#ffffff"
                     android:text="전화 연결"
+                    android:paddingLeft="10dp"
+                    android:drawableLeft="@drawable/phone"
                     android:onClick="onButton2Clicked" />
             </LinearLayout>
         </LinearLayout>
