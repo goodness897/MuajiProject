@@ -56,7 +56,7 @@ public class ItemActivity extends Activity {
             R.drawable.four,
             R.drawable.fifth,
     };
-    String[] menuName = {"1", "2", "3", "4", "5"};
+    //String[] menuName = {"1", "2", "3", "4", "5"};
     private int position;
     private int count;
     private float totalRank;
@@ -83,7 +83,7 @@ public class ItemActivity extends Activity {
         menuImage3 = (ImageView)findViewById(R.id.menu_image3);
         menuImage4 = (ImageView)findViewById(R.id.menu_image4);
         textView = (TextView)findViewById(R.id.textView);
-        textView.setText(menuName[0]);
+        //textView.setText(menuName[0]);
 
         setImage(menuImage1, "http://www.hsd.co.kr/resources/uploads/lunch/1433477392252_rrqnwbzu.jpg");
         setImage(menuImage2, "http://www.hsd.co.kr/resources/uploads/lunch/1433477371928_hdujnuwk.jpg");
@@ -109,23 +109,23 @@ public class ItemActivity extends Activity {
                 switch (position) {
                     case 0:
                         radioGroup.check(R.id.radioButton);
-                        textView.setText(menuName[0]);
+                        //textView.setText(menuName[0]);
                         break;
                     case 1:
                         radioGroup.check(R.id.radioButton2);
-                        textView.setText(menuName[1]);
+                        //textView.setText(menuName[1]);
                         break;
                     case 2:
                         radioGroup.check(R.id.radioButton3);
-                        textView.setText(menuName[2]);
+                        //textView.setText(menuName[2]);
                         break;
                     case 3:
                         radioGroup.check(R.id.radioButton4);
-                        textView.setText(menuName[3]);
+                        //textView.setText(menuName[3]);
                         break;
                     case 4:
                         radioGroup.check(R.id.radioButton5);
-                        textView.setText(menuName[4]);
+                        //textView.setText(menuName[4]);
                         break;
                 }
 
@@ -213,7 +213,7 @@ public class ItemActivity extends Activity {
                /* String myRank = Float.toString(score);
                 String.format("%.2f", Double.valueOf(myRank));*/
                 RatingBar rateBar = (RatingBar) findViewById(R.id.rateBar);
-                rateBar.setRating(userRankValue);
+                rateBar.setRating(score);
                 TextView rateText = (TextView) findViewById(R.id.rateText);
                 rateText.setText(myRank);
                 TextView rateCount = (TextView)findViewById(R.id.ratecountText);

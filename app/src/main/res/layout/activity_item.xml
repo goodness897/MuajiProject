@@ -128,7 +128,9 @@
                     android:layout_gravity="left|center"
                     style="@style/starRatingBar"
                     android:clickable="false"
+                    android:isIndicator="true"
                     android:numStars="5"
+                    android:stepSize="0.5"
                     android:rating="4.3" />
 
                 <TextView
@@ -289,15 +291,16 @@
                         android:layout_marginLeft="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/menuicon"/>
+                        android:background="@drawable/mapicon"
+                        android:layout_gravity="center"/>
                     <TextView
+                        android:id="@+id/locationText"
                         android:layout_marginLeft="40dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:textColor="#404040"
-                        android:text="주소"/>
-
+                        android:text="서울특별시 강남구 역삼1동 648-23 여삼빌딩 15층"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
@@ -317,7 +320,7 @@
                     android:background="@color/mainColor"
                     android:textColor="#ffffff"
                     android:layout_marginTop="10dp"
-                    android:text="리뷰 쓰기"
+                    android:text="평점 주기"
                     android:onClick="onButton3Clicked" />
             </LinearLayout>
 
