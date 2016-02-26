@@ -108,30 +108,31 @@
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="한솥 도시락"
+                android:text="19뜯고 맛보고"
                 android:textColor="#404040"
                 android:textSize="21sp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="72dp"
+                android:layout_marginLeft="24dp"
                 android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="72dp">
+                android:layout_marginLeft="24dp">
 
                 <RatingBar
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:id="@+id/rateBar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="17dp"
                     android:layout_gravity="left|center"
                     style="@style/starRatingBar"
                     android:clickable="false"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:stepSize="0.5"
-                    android:rating="4.3" />
+                    android:rating="4.3"
+                    android:layout_marginBottom="3dp" />
 
                 <TextView
                     android:id="@+id/rateText"
@@ -152,12 +153,12 @@
                 android:id="@+id/item_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="좋은 재료, 좋은 가격 한솥 도시락"
+                android:text="시립대 정문, 맛있는 숯불고기!"
                 android:layout_below="@+id/textView"
                 android:textColor="#777777"
                 android:textSize="15sp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="72dp"/>
+                android:layout_marginLeft="24dp"/>
 
             ImageView
                 android:layout_marginTop="5dp"
@@ -300,7 +301,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:textColor="#404040"
-                        android:text="서울특별시 강남구 역삼1동 648-23 여삼빌딩 15층"/>
+                        android:text="서울특별시 동대문구 전농동"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"

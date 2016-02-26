@@ -8,17 +8,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.SyncStateContract;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,10 +27,8 @@ import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class ItemActivity extends Activity {
 
@@ -54,7 +48,7 @@ public class ItemActivity extends Activity {
             R.drawable.second,
             R.drawable.third,
             R.drawable.four,
-            R.drawable.fifth,
+            R.drawable.five
     };
     //String[] menuName = {"1", "2", "3", "4", "5"};
     private int position;
@@ -85,14 +79,14 @@ public class ItemActivity extends Activity {
         textView = (TextView)findViewById(R.id.textView);
         //textView.setText(menuName[0]);
 
-        setImage(menuImage1, "http://www.hsd.co.kr/resources/uploads/lunch/1433477392252_rrqnwbzu.jpg");
-        setImage(menuImage2, "http://www.hsd.co.kr/resources/uploads/lunch/1433477371928_hdujnuwk.jpg");
-        setImage(menuImage3, "http://www.hsd.co.kr/resources/uploads/lunch/1435645212983_kkqeuafp.jpg");
-        setImage(menuImage4, "http://www.hsd.co.kr/resources/uploads/lunch/1433486885624_xijfduwu.jpg");
-        mAdapter.add(new ItemData("개나리 도시락", "8,000원"));
-        mAdapter.add(new ItemData("진달래 도시락", "7,000원"));
-        mAdapter.add(new ItemData("불고기 비빔밥", "4,500원"));
-        mAdapter.add(new ItemData("고기고기 도시락", "3,600원"));
+        setImage(menuImage1, "http://modo.phinf.naver.net/20150811_33/1439281518870ppFpy_JPEG/mosaP7VMu1.jpeg?type=f640_460");
+        setImage(menuImage2, "http://modo.phinf.naver.net/20150811_185/1439281519692h4ekn_JPEG/mosamgMImq.jpeg?type=f640_460");
+        setImage(menuImage3, "http://modo.phinf.naver.net/20150811_135/1439281520568Fijlo_JPEG/mosaY5VywR.jpeg?type=f640_460");
+        setImage(menuImage4, "http://modo.phinf.naver.net/20150811_285/1439281521356Gdxlt_JPEG/mosa1PSIqk.jpeg?type=f640_460");
+        mAdapter.add(new ItemData("통 오겹살", "7,000원"));
+        mAdapter.add(new ItemData("통 삼겹살", "6,000원"));
+        mAdapter.add(new ItemData("얇은 삼겹살", "5,000원"));
+        mAdapter.add(new ItemData("매운 닭발", "7,000원"));
         //listView.setAdapter(menuArray);
         mCustomPagerAdapter = new CustomPagerAdapter(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -251,6 +245,14 @@ public class ItemActivity extends Activity {
         final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
         mTitleTextView.setText(title);
+        mTitleTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton imageButton = (ImageButton) mCustomView
                 .findViewById(R.id.search_image);

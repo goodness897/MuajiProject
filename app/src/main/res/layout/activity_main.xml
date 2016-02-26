@@ -88,7 +88,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginRight="1dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
@@ -109,7 +109,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
+            android:layout_marginRight="3dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
@@ -142,7 +142,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginRight="1dp"
             android:layout_marginTop="1dp"
             android:layout_weight="1"
@@ -163,7 +163,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
+            android:layout_marginRight="3dp"
             android:layout_marginTop="1dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
@@ -196,7 +196,9 @@
             android:layout_weight="1"
             android:text="모두 제작 / 의뢰"
             android:textColor="#ffffff"
-            android:background="@color/mainColor"/>
+            android:background="@color/mainColor"
+            android:nestedScrollingEnabled="false"
+            android:onClick="onModooClicked" />
 
 
     </LinearLayout>

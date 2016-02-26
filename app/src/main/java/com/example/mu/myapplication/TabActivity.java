@@ -1,21 +1,11 @@
 package com.example.mu.myapplication;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -144,6 +134,14 @@ public class TabActivity extends FragmentActivity {
         final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
         mTitleTextView.setText(title);
+        mTitleTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton imageButton = (ImageButton) mCustomView
                 .findViewById(R.id.search_image);

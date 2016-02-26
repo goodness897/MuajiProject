@@ -13,20 +13,12 @@
         <ImageView
             android:id="@+id/image_icon"
             android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_height="140dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/first"
-            android:scaleType="fitXY" />
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            style="@style/starRatingBar"
-            android:clickable="false"
-            android:isIndicator="true"
-            android:rating = "4.0"
-            android:stepSize="0.5" />
+            android:scaleType="centerCrop" />
+
     </LinearLayout>
 
 
@@ -73,12 +65,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/text_name2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="대표 메뉴"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginLeft="0dp"
+            style="@style/starRatingBar"
+            android:clickable="false"
+            android:isIndicator="true"
+            android:rating = "4.0"
+            android:stepSize="0.5"
             android:layout_marginTop="5dp" />
 
         <TextView

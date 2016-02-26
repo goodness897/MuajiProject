@@ -5,15 +5,13 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,14 +51,13 @@ public class MainActivity extends Activity {
     Button enjoyButton;
     private boolean local = false;
     private ListView drawerList;
-    private String[] navItems = {"무아지경","박무성","박지훈","김아연"};
+    private String[] navItems = {"우리 모두 소개", "김아연", "박무성", "박지훈" };
     private DrawerLayout mDrawerLayout;
     private boolean mSlideState = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         arrayForSpinner = getResources().getStringArray(R.array.university);
         drawerList = (ListView)findViewById(R.id.lv_activity_main_nav_list);
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,navItems));
@@ -107,8 +104,11 @@ public class MainActivity extends Activity {
         spinner.setMinimumWidth(30);
 */
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            String item = (String) spinner.getSelectedItem();
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -154,6 +154,18 @@ public class MainActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+            selectItem(position);
+            Toast.makeText(getApplicationContext(), (String)drawerList.getSelectedItem() , Toast.LENGTH_LONG).show();
+        }
+    }
+    public void selectItem(int position){
+        if(position == 0){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.parse("http://mooajee.modoo.at/");
+            intent.setData(uri);
+            startActivity(intent);
+
+        }else {
 
         }
     }
@@ -321,6 +333,14 @@ public class MainActivity extends Activity {
         final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
         mTitleTextView.setText(title);
+        mTitleTextView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton searchButton = (ImageButton) mCustomView
                 .findViewById(R.id.search_image);
@@ -353,6 +373,15 @@ public class MainActivity extends Activity {
     });
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
+
+    }
+
+    public void onModooClicked(View v){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        Uri uri = Uri.parse("http://mooajee.modoo.at/");
+        intent.setData(uri);
+        startActivity(intent);
 
     }
 

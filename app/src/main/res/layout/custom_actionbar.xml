@@ -32,7 +32,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
         android:background="@null"
-        android:src="@drawable/ic_drawer"/>
+        android:src="@drawable/ic_menu"/>
 
     <ImageButton
         android:id="@+id/search_image"
@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="12dp"
         android:background="@null"
-        android:src="@android:drawable/ic_menu_search" />
+        android:src="@drawable/ic_search" />
 
 </RelativeLayout>
