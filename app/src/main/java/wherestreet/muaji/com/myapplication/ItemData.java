@@ -1,4 +1,4 @@
-package com.example.mu.myapplication;
+package wherestreet.muaji.com.myapplication;
 
 public class ItemData {
     public int imageId;

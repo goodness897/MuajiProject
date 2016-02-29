@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.example.mu.myapplication"
+        applicationId "wherestreet.muaji.com.myapplication"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1

@@ -1,10 +1,8 @@
-package com.example.mu.myapplication;
+package wherestreet.muaji.com.myapplication;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

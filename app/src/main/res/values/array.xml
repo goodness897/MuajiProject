@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="university">
+        <item>naver</item>
         <item>가톨릭대학교</item>
         <item>감리교신학대학교</item>
         <item>강원대학교</item>

@@ -1,4 +1,4 @@
-package com.example.mu.myapplication;
+package wherestreet.muaji.com.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,9 +1,8 @@
-package com.example.mu.myapplication;
+package wherestreet.muaji.com.myapplication;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MenuView extends FrameLayout {

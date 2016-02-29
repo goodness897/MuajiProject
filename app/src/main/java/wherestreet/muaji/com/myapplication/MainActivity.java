@@ -1,10 +1,13 @@
-package com.example.mu.myapplication;
+package wherestreet.muaji.com.myapplication;
 
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,6 +17,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -53,27 +57,70 @@ public class MainActivity extends Activity {
     private ListView drawerList;
     private String[] navItems = {"우리 모두 소개", "김아연", "박무성", "박지훈" };
     private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
     private boolean mSlideState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        arrayForSpinner = getResources().getStringArray(R.array.university);
+
+        //start AlertDialog();
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("위치정보동의");
+        builder1.setCancelable(false);
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        local = true;
+                        Toast.makeText(getApplicationContext(), "true", Toast.LENGTH_LONG).show();
+                        dialog.cancel();
+                    }
+                }
+        );
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        local = false;
+                        Toast.makeText(getApplicationContext(), "false", Toast.LENGTH_LONG).show();
+                        dialog.cancel();
+                    }
+                }
+        );
+        AlertDialog alert = builder1.create();
+        alert.show();
+        //end AlertDialog();
+
+        // make ActionBar
+        title = getString(R.string.app_name);
+        setActionBar(title);
+
+        // drawer start
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.my_drawer_layout); //Create the DrawerLayout
         drawerList = (ListView)findViewById(R.id.lv_activity_main_nav_list);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,navItems));
+
+        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, navItems));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.my_drawer_layout);
-        mDrawerLayout.setDrawerListener(new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, 0, 0){
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                mSlideState = false;//is Closed
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer,
+                R.string.drawer_open,
+                R.string.drawer_close) {
+            public void onDrawerClosed(View view){
+                super.onDrawerClosed(view);
+
             }
-            @Override
-            public void onDrawerOpened(View drawerView) {
+            public void onDrawerOpened(View drawerView){
                 super.onDrawerOpened(drawerView);
-                mSlideState = true;//is Opened
-            }});
+
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
 
         // 폰트 변경
         /*foodButton = (Button)findViewById(R.id.buttonFood);
@@ -84,19 +131,17 @@ public class MainActivity extends Activity {
         funButton.setTypeface(Typeface.createFromAsset(getAssets(), "NanumGothicExtraBold.ttf"));
         enjoyButton = (Button)findViewById(R.id.buttonEnjoy);*/
 
-        // make ActionBar
-        title = getString(R.string.app_name);
-        setActionBar(title);
+
         spinner = (Spinner) findViewById(R.id.spinner);
-        local = true;
         if(local){
             location = setLocation();
         }
+        arrayForSpinner = getResources().getStringArray(R.array.university); // spinner 에 들어갈 값, university value로 부터 getResource
+//        System.out.println("위치는 : " +location);
+       /* if(location != null){
 
-        System.out.println("위치는 : " +location);
-        if(location != null){
-            spinner.setAdapter(new CustomSpinnerAdapter(this, R.layout.spinner_row, arrayForSpinner, location));
-        }
+        }*/
+        spinner.setAdapter(new CustomSpinnerAdapter(this, R.layout.spinner_row, arrayForSpinner, location));
 
         /*addspin = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
         addspin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -104,11 +149,9 @@ public class MainActivity extends Activity {
         spinner.setMinimumWidth(30);
 */
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            String item = (String) spinner.getSelectedItem();
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_LONG).show();
+               Toast.makeText(getBaseContext(), (String)spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -148,26 +191,39 @@ public class MainActivity extends Activity {
             }
         });*/
 
-
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    // define the DrawerItemClickListener
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             selectItem(position);
-            Toast.makeText(getApplicationContext(), (String)drawerList.getSelectedItem() , Toast.LENGTH_LONG).show();
         }
     }
-    public void selectItem(int position){
-        if(position == 0){
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri uri = Uri.parse("http://mooajee.modoo.at/");
-            intent.setData(uri);
-            startActivity(intent);
+    private void selectItem(int position){
 
-        }else {
-
+        Intent intent;
+        switch(position) {
+            case 1:
+                Toast.makeText(getApplicationContext(), "position : " +position, Toast.LENGTH_LONG).show();
+                /*Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("http://mooajee.modoo.at/");
+                intent.setData(uri);
+                startActivity(intent);*/
+                break;
+            default:
+                break;
         }
+        drawerList.setItemChecked(position, true);
+        drawerList.setSelection(position);
+        mDrawerLayout.closeDrawer(drawerList);
+        //mDrawerLayout.closeDrawer(drawerList);
     }
     public String setLocation() {
         gps = GpsInfo.getLocationManager(MainActivity.this);
@@ -178,7 +234,6 @@ public class MainActivity extends Activity {
             double longitude = gps.getLongitude();
             current_location = findAddress(latitude, longitude);
             label = (TextView) findViewById(R.id.spinner_text);
-            local = false;
         } else {
             // GPS 를 사용할수 없으므로
             //  gps.showSettingsAlert();
@@ -186,7 +241,7 @@ public class MainActivity extends Activity {
         return current_location;
 
     }
-    // Custom 스피너
+    // Custom spinner
     public class CustomSpinnerAdapter extends ArrayAdapter<String>{
 
         Context context;
@@ -361,11 +416,10 @@ public class MainActivity extends Activity {
         });
         ImageButton drawerButton = (ImageButton) mCustomView.findViewById(R.id.drawer_image);
         drawerButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (mSlideState) {
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                   // mDrawerLayout.closeDrawer(Gravity.RIGHT);
                 } else {
                     mDrawerLayout.openDrawer(Gravity.LEFT);
                 }
@@ -375,7 +429,16 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowCustomEnabled(true);
 
     }
-
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
     public void onModooClicked(View v){
         Intent intent = new Intent(Intent.ACTION_VIEW);
 
@@ -384,6 +447,4 @@ public class MainActivity extends Activity {
         startActivity(intent);
 
     }
-
-
 }
