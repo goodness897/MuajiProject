@@ -39,7 +39,7 @@ public class ItemActivity extends Activity {
     ImageView menuImage3;
     ImageView menuImage4;
     ListView listView;
-    My2Adapter mAdapter;
+    MyItemAdapter mAdapter;
     TextView textView;
 
     RatingBar ratingBar;
@@ -70,7 +70,7 @@ public class ItemActivity extends Activity {
         String title = getString(R.string.app_name);
         setActionBar(title);
 
-        mAdapter = new My2Adapter(this);
+        mAdapter = new MyItemAdapter(this);
         listView.setAdapter(mAdapter);
         menuImage1 = (ImageView)findViewById(R.id.menu_image1);
         menuImage2 = (ImageView)findViewById(R.id.menu_image2);

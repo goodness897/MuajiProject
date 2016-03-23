@@ -8,12 +8,12 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends BaseAdapter {
+public class MyListAdapter extends BaseAdapter {
 
     ArrayList<ItemData> items = new ArrayList<ItemData>();
     Context mContext;
 
-    public MyAdapter(Context context) {
+    public MyListAdapter(Context context) {
         mContext = context;
     }
 

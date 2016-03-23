@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends Activity {
+    public static final String TAG = "modoo";
     private Intent intent;
     private ArrayAdapter<CharSequence> addspin;
     private Spinner spinner;
@@ -48,11 +50,7 @@ public class MainActivity extends Activity {
     private String title;
     private String location;
     private String[] arrayForSpinner;
-    TextView label;
-    Button foodButton;
-    Button showButton;
-    Button funButton;
-    Button enjoyButton;
+    private TextView label;
     private boolean local = false;
     private ListView drawerList;
     private String[] navItems = {"우리 모두 소개", "김아연", "박무성", "박지훈" };
@@ -131,10 +129,9 @@ public class MainActivity extends Activity {
         funButton.setTypeface(Typeface.createFromAsset(getAssets(), "NanumGothicExtraBold.ttf"));
         enjoyButton = (Button)findViewById(R.id.buttonEnjoy);*/
 
-
         spinner = (Spinner) findViewById(R.id.spinner);
         if(local){
-            location = setLocation();
+            setLocation();
         }
         arrayForSpinner = getResources().getStringArray(R.array.university); // spinner 에 들어갈 값, university value로 부터 getResource
 //        System.out.println("위치는 : " +location);
@@ -225,7 +222,7 @@ public class MainActivity extends Activity {
         mDrawerLayout.closeDrawer(drawerList);
         //mDrawerLayout.closeDrawer(drawerList);
     }
-    public String setLocation() {
+    private void setLocation() {
         gps = GpsInfo.getLocationManager(MainActivity.this);
         String current_location = "성남시";
         // GPS 사용유무 가져오기
@@ -233,12 +230,14 @@ public class MainActivity extends Activity {
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
             current_location = findAddress(latitude, longitude);
-            label = (TextView) findViewById(R.id.spinner_text);
+            label = (TextView)findViewById(R.id.spinner_text);
+            label.setText(current_location);
+            Log.i(TAG, "현재 위치는 : " + current_location);
+            Log.i(TAG, "현재 위치는 : " + latitude + "," + longitude);
         } else {
             // GPS 를 사용할수 없으므로
             //  gps.showSettingsAlert();
         }
-        return current_location;
 
     }
     // Custom spinner
@@ -345,30 +344,37 @@ public class MainActivity extends Activity {
         return bf.toString();
     }
 
-    public void onBtnFoodClicked(View v) {
-        intent = new Intent(this, TabActivity.class);
-        intent.putExtra("type", 0);
-        startActivity(intent);
-    }
+    public void onBtnClicked(View v){
+        switch(v.getId()){
+            case R.id.buttonFood:
+                intent = new Intent(this, TabActivity.class);
+                intent.putExtra("type", 0);
+                startActivity(intent);
+                break;
+            case R.id.buttonShow:
+                intent = new Intent(this, TabActivity.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
+                break;
+            case R.id.buttonFun:
+                intent = new Intent(this, TabActivity.class);
+                intent.putExtra("type", 2);
+                startActivity(intent);
+                break;
+            case R.id.buttonEnjoy:
+                intent = new Intent(this, TabActivity.class);
+                intent.putExtra("type", 3);
+                startActivity(intent);
+                break;
+            case R.id.btnRequest:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("http://mooajee.modoo.at/");
+                intent.setData(uri);
+                startActivity(intent);
+                break;
 
-    public void onBtnShowClicked(View v) {
-        intent = new Intent(this, TabActivity.class);
-        intent.putExtra("type", 1);
-        startActivity(intent);
+        }
     }
-
-    public void onBtnFunClicked(View v) {
-        intent = new Intent(this, TabActivity.class);
-        intent.putExtra("type", 2);
-        startActivity(intent);
-    }
-
-    public void onBtnEnjoyClicked(View v) {
-        intent = new Intent(this, TabActivity.class);
-        intent.putExtra("type", 3);
-        startActivity(intent);
-    }
-
     public void onImageClicked(View v) {
         intent = new Intent(this, CouponActivity.class);
         startActivity(intent);
@@ -384,12 +390,10 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-
         final TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         final EditText searchEdit = (EditText)mCustomView.findViewById(R.id.search_text);
         mTitleTextView.setText(title);
         mTitleTextView.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -438,13 +442,5 @@ public class MainActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-    public void onModooClicked(View v){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-
-        Uri uri = Uri.parse("http://mooajee.modoo.at/");
-        intent.setData(uri);
-        startActivity(intent);
-
     }
 }

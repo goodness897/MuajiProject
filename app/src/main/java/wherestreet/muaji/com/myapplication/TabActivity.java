@@ -19,47 +19,23 @@ public class TabActivity extends FragmentActivity {
     ViewPager pager;
     TabsAdapter mAdapter;
     private int type;
-    private static final String TAB_TAG = "currentTab";
+    public static final String TAB_TAG = "currentTab";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
         tabHost = (TabHost) findViewById(android.R.id.tabhost);
-
         tabHost.setup();
         pager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new TabsAdapter(this, getSupportFragmentManager(), tabHost, pager);
         Intent intent = getIntent();
         type = intent.getExtras().getInt("type");
         intent.putExtra("type", type);
-
         String title = getString(R.string.app_name);
         setActionBar(title);
+        init(type, intent);
 
-        switch (type) {
-            case 0:
-
-                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("음식점").setContent(intent), Tab1.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("술집").setContent(intent), Tab2.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("카페").setContent(intent), Tab3.class, null);
-                break;
-            case 1:
-                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("공연").setContent(intent), Tab1.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("전시").setContent(intent), Tab2.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("공원").setContent(intent), Tab3.class, null);
-                break;
-            case 2:
-                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("쇼핑").setContent(intent), Tab1.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("노래방").setContent(intent), Tab2.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("당구장").setContent(intent), Tab3.class, null);
-                break;
-            case 3:
-                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("헤어").setContent(intent), Tab1.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("네일").setContent(intent), Tab2.class, null);
-                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("세탁/수선").setContent(intent), Tab3.class, null);
-                break;
-        }
         TabWidget widget = tabHost.getTabWidget();
         for(int i = 0; i < widget.getChildCount(); i++) {
             View v = widget.getChildAt(i);
@@ -119,6 +95,31 @@ public class TabActivity extends FragmentActivity {
         return true;
     }
 */
+    private void init(int type, Intent intent) {
+        switch (type) {
+            case 0:
+                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("음식점").setContent(intent), Tab1.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("술집").setContent(intent), Tab2.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("카페").setContent(intent), Tab3.class, null);
+                break;
+            case 1:
+                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("공연").setContent(intent), Tab1.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("전시").setContent(intent), Tab2.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("공원").setContent(intent), Tab3.class, null);
+                break;
+            case 2:
+                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("쇼핑").setContent(intent), Tab1.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("노래방").setContent(intent), Tab2.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("당구장").setContent(intent), Tab3.class, null);
+                break;
+            case 3:
+                mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("헤어").setContent(intent), Tab1.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab2").setIndicator("네일").setContent(intent), Tab2.class, null);
+                mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("세탁/수선").setContent(intent), Tab3.class, null);
+                break;
+        }
+
+    }
 
     public int getType() {
         return type;

@@ -26,8 +26,8 @@ public class MenuView extends FrameLayout {
 
     public void setItemData(ItemData data) {
         mData = data;
-        representMenu.setText(data.repremenu);
-        Price.setText(data.price);
+        representMenu.setText(data.getRepremenu());
+        Price.setText(data.getPrice());
     }
 
 }

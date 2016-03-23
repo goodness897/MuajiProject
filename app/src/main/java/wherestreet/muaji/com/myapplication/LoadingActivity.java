@@ -1,11 +1,11 @@
 package wherestreet.muaji.com.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 
-public class LoadingActivity extends AppCompatActivity {
+public class LoadingActivity extends Activity {
     Handler hd;
 
     @Override
@@ -25,8 +25,6 @@ public class LoadingActivity extends AppCompatActivity {
 
         }
     };
-
-
         @Override
     public void onBackPressed() {
         super.onBackPressed();

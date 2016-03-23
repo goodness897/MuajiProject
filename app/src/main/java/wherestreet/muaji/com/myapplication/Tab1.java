@@ -1,6 +1,5 @@
 package wherestreet.muaji.com.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class Tab1 extends Fragment {
-    Context mContext;
-    ListView listView;
-    MyAdapter mAdapter;
-    TabActivity mTab;
+    private ListView listView;
+    private MyListAdapter mAdapter;
     private int type;
 
     public Tab1() {
-
     }
 
     /*public Tab1(Context context) {
@@ -31,7 +27,7 @@ public class Tab1 extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tabs1, null);
         listView = (ListView) view.findViewById(R.id.listView);
-        mAdapter = new MyAdapter(getContext());
+        mAdapter = new MyListAdapter(getContext());
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(mItemClickListener);
 
@@ -56,7 +52,6 @@ public class Tab1 extends Fragment {
 
     private void initData() {
         String s;
-
         switch (type) { //image, title, type, content, menu1, menu2
             case 0: // 먹거리
                 s = "음식점";

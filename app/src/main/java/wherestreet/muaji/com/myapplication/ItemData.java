@@ -1,14 +1,14 @@
 package wherestreet.muaji.com.myapplication;
 
 public class ItemData {
-    public int imageId;
-    public String title;
-    public String type;
-    public String content;
-    public String menu1;
-    public String menu2;
-    public String repremenu;
-    public String price;
+    private int imageId;
+    private String title;
+    private String type;
+    private String content;
+    private String menu1;
+    private String menu2;
+    private String repremenu;
+    private String price;
 
     public ItemData(int imageId, String title, String type, String content, String menu1, String menu2) {
         this.imageId = imageId;
@@ -71,5 +71,21 @@ public class ItemData {
 
     public void setMenu2(String menu2) {
         this.menu2 = menu2;
+    }
+
+    public String getRepremenu() {
+        return repremenu;
+    }
+
+    public void setRepremenu(String repremenu) {
+        this.repremenu = repremenu;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

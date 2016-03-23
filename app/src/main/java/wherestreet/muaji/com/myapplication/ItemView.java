@@ -28,12 +28,12 @@ public class ItemView extends FrameLayout {
     ItemData mData;
     public void setItemData(ItemData data){
         mData = data;
-        iconView.setImageResource(data.imageId);
-        titleView.setText(data.title);
-        typeView.setText(data.type);
-        contentView.setText(data.content);
-        menu1View.setText(data.menu1);
-        menu2View.setText(data.menu2);
+        iconView.setImageResource(data.getImageId());
+        titleView.setText(data.getTitle());
+        typeView.setText(data.getType());
+        contentView.setText(data.getContent());
+        menu1View.setText(data.getMenu1());
+        menu2View.setText(data.getMenu2());
 
     }
 

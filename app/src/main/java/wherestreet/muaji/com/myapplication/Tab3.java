@@ -12,7 +12,7 @@ import android.widget.ListView;
 public class Tab3 extends Fragment {
     Context mContext;
     ListView listView;
-    MyAdapter mAdapter;
+    MyListAdapter mAdapter;
     private int type;
 
     public Tab3() {
@@ -29,7 +29,7 @@ public class Tab3 extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tabs1, null);
         listView = (ListView) view.findViewById(R.id.listView);
-        mAdapter = new MyAdapter(getContext());
+        mAdapter = new MyListAdapter(getContext());
         listView.setAdapter(mAdapter);
 
         Intent intent = getActivity().getIntent(); // type 값 받아오기

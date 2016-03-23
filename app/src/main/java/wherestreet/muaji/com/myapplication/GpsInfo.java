@@ -38,10 +38,6 @@ public class GpsInfo extends Service implements LocationListener {
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
     private boolean locationServiceAvailable = true;
-
-    private MainActivity main;
-
-
     public static GpsInfo getLocationManager(Context context) {
         if (instance == null) {
             instance = new GpsInfo(context);
@@ -176,6 +172,8 @@ public class GpsInfo extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        initLocationService(getApplicationContext());
+
 
     }
 

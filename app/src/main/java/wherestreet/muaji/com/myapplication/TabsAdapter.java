@@ -85,7 +85,6 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
             }
         }
     }
-
     public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
         tabSpec.setContent(new DummyTabFactory(mContext));
         String tag = tabSpec.getTag();
@@ -134,8 +133,6 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
         if (mPageChangeListener != null) {
             mPageChangeListener.onPageScrollStateChanged(state);
         }
-
-
     }
 
     @Override
@@ -147,7 +144,6 @@ public class TabsAdapter extends FragmentPagerAdapter implements TabHost.OnTabCh
         }
 
     }
-
     public Fragment getTabFragment(int position) {
         TabInfo info = mTabs.get(position);
         if (info != null) {
